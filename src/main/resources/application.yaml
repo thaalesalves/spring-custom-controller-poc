@@ -2,6 +2,7 @@ app:
     controllers-enabled:
         - Person
     endpoint.person: person
+    endpoint.car: cars
 
 spring:
   datasource:
