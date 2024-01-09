@@ -1,0 +1,11 @@
+app:
+    controllers-enabled:
+        - Person
+    endpoint.person: person
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:poc
+    username: thp
+    password: Thp1234$
+    driverClassName: org.h2.Driver
