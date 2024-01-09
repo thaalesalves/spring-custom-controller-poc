@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
@@ -20,18 +19,13 @@ public class ControllerRequestMappingHandlerMapping extends RequestMappingHandle
     @Override
     protected RequestMappingInfo getMappingForMethod(Method method, Class<?> handlerType) {
 
-        if (handlerType == null) {
-            return null;
-        }
-
         List<String> enabledControllers = applicationProperties.getControllersEnabled().stream()
                 .map(controllerName -> controllerName + CONTROLLER)
                 .collect(Collectors.toList());
 
-        boolean isRestController = handlerType.isAnnotationPresent(RestController.class);
         boolean isEnabled = enabledControllers.contains(handlerType.getSimpleName());
 
-        if (isRestController && isEnabled) {
+        if (isEnabled) {
             return super.getMappingForMethod(method, handlerType);
         }
 
